@@ -1,0 +1,16 @@
+.message-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f9f9f9;
+}
+
+.message-card-user {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #8cff92;
+    font-weight: bold;
+}
