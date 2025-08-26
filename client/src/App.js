@@ -1,3 +1,4 @@
+import "./index.css";
 import './App.css';
 import ChatField from './ChatField';
 import ChatTextField from './ChatTextField';
@@ -5,7 +6,7 @@ import ChatTextField from './ChatTextField';
 import 'emoji-picker-element';
 import EmojiPicker from './EmojiPicker';
 
-import { useState, useEffect, useRef, createElement } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 function App() {
@@ -35,14 +36,22 @@ function App() {
 
   return (
     <div className="App">
-      Hallo Welt!
-      <p>Dies ist eine React App.</p>
-      <p>Sie läuft auf dem Client.</p>
-      <input id="name-field" type="text" placeholder="Gib deinen Namen ein..." style={{height: "20px", margin: "10px"}}/>
+      <h1>Benes Chat App</h1>
+      <input id="name-field" class="name-field" type="text" placeholder="Gib deinen Namen ein..." />
       <ChatField messages={messages} />
       <ChatTextField />
-      <EmojiPicker emojiSelectCallback={emojiSelectCallback} />
-      <button onClick={() => handleSend(socketRef, setMessages)}>Senden</button>
+      <div class="chat-controls">
+        <button class="send-button" onClick={() => handleSend(socketRef, setMessages)}>
+          <span>Senden</span>
+          <span class="send-icon-container">
+            <img src="send-alt-1-svgrepo-com.svg" alt="Senden" class="send-icon" />
+          </span>
+        </button>
+        <button class="emoji-button" onClick={showEmojiPicker}>Emoji</button>
+      </div>
+      <div id="emoji-picker-container" style={{ display: 'none'}}>
+        <EmojiPicker emojiSelectCallback={emojiSelectCallback} />
+      </div>
     </div>
   );
 }
@@ -76,6 +85,19 @@ function handleSend(socketRef, setMessages) {
 function emojiSelectCallback(event) {
   const chatTextField = document.getElementById("chat-text-field");
   chatTextField.value += event.detail.unicode;
+
+  // Hide the emoji picker after selecting an emoji
+  const emojiPickerContainer = document.getElementById("emoji-picker-container");
+  emojiPickerContainer.style.display = "none";
+}
+
+function showEmojiPicker() {
+  const emojiPickerContainer = document.getElementById("emoji-picker-container");
+  if (emojiPickerContainer.style.display === "none") {
+    emojiPickerContainer.style.display = "block";
+  } else {
+    emojiPickerContainer.style.display = "none";
+  }
 }
 
 

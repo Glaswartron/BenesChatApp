@@ -1,0 +1,111 @@
+.App {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.name-field {
+    width: 3%;
+    min-width: 180px;
+    height: 3%;
+    margin: 10px;
+    padding: 3px;
+
+    font-size: 18px;
+
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.name-field:hover {
+    background-color: #f4f4f4;
+    border: 2px solid #555;
+}
+
+.name-field:focus {
+    border: 2px solid #555;
+    box-shadow: 0 0 5px #aaa;
+}
+
+.chat-controls {
+    display: flex;
+    margin-top: 10px;
+    gap: 2px;
+}
+
+.send-button {
+    background-color: #60c4e8;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 16px;
+
+    transition: transform 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+}
+
+.send-button:hover {
+    background-color: #45aee0;
+}
+
+.send-button:active {
+    transform: scale(0.95);
+    background-color: #2d8bbf;
+}
+
+.send-button .send-icon-container {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s ease; /* This is the key transition */
+    display: flex; /* Helps align the icon inside the container */
+    align-items: center;
+    justify-content: center;
+}
+
+.send-button .send-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0; /* Starts hidden */
+    transition: opacity 0.5s ease;
+}
+
+.send-button:hover .send-icon-container {
+    width: 25px; /* Adjust this value to create enough space for the icon + padding */
+}
+
+.send-button:hover .send-icon {
+    opacity: 1; /* Fades in on hover */
+}
+
+.emoji-button {
+    background-color: #60e896;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 16px;
+
+    transition: transform 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+}
+
+.emoji-button:hover {
+    background-color: #45d87e;
+}
+
+.emoji-button:active {
+    transform: scale(0.95);
+    background-color: #2dbf5f;
+}
