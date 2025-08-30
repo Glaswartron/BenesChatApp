@@ -2,6 +2,7 @@ import "./index.css";
 import './App.css';
 import ChatField from './ChatField';
 import ChatTextField from './ChatTextField';
+import SignInPage from "./SignInPage";
 
 import 'emoji-picker-element';
 import EmojiPicker from './EmojiPicker';
@@ -10,12 +11,19 @@ import { useState, useEffect, useRef } from 'react';
 
 
 function App() {
-  const socketRef = useRef(null);
 
+  const socketRef = useRef(null);
   let [messages, setMessages] = useState([]);
 
-  // Only runs once when the component mounts
+  let [signedIn, setSignedIn] = useState(false);
+  const usernameRef = useRef("");
+
+  // Only runs once when the component mounts (+ whenever signedIn changes)
   useEffect(() => {
+    if (!signedIn) {
+      return;
+    }
+
     socketRef.current = new WebSocket('ws://localhost:4000/ws');
 
     socketRef.current.onopen = () => {
@@ -32,7 +40,14 @@ function App() {
     return () => {
       socketRef.current.close();
     };
-  }, []); 
+  }, [signedIn]); // Depends on signedIn, so it re-runs when signedIn changes 
+
+  if (!signedIn) {
+    return <SignInPage onSignIn={() => {
+      usernameRef.current = username;
+      setSignedIn(true);
+    }} />;
+  }
 
   return (
     <div className="App">
